@@ -1,1 +1,1 @@
-# Nho-m-ba-i-t-p-l-n-ly-thuy-t-m-t-ma---173869
+Nhóm bài tập lớn lý thuyết mật mã - 173869
