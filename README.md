@@ -85,8 +85,6 @@ LEX-Stream-Cipher/
                     build_reference_trace.py, convert_kat.py
 ```
 
-> Gói `src/lex/lex/` hiện làm import thành `lex.lex.*`. Nếu cả nhóm đồng ý đổi tên thành `src/lex/stream/` thì phải đổi đồng thời import trong test, trước khi tạo skeleton.
-
 ### Luồng xử lý
 
 ```text
