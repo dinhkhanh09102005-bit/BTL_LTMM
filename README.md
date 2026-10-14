@@ -1,4 +1,5 @@
 # LEX — Dự án triển khai mã hóa dòng bằng Python
+
 ## 1. Mục tiêu dự án
 
 Triển khai thuật toán mã dòng **LEX (Leak EXtraction)** theo bản dự thi eSTREAM Phase 3 (**LEX-128, mã tham chiếu v2**), bảo đảm module hóa, kiểm chứng từng tầng biến đổi và đối soát với mã C tham chiếu.
