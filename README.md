@@ -218,19 +218,7 @@ def decrypt(key: ByteData, iv: ByteData, ciphertext: ByteData) -> bytes: ...
 
 ---
 
-## 8. Checklist nghiệm thu
-
-* [ ] Chạy trên Python 3.10+, không dùng thư viện mật mã ngoài.
-* [ ] IV setup là AES-128 chuẩn trên IV đã đảo byte theo nhóm 4 byte, không trích leak.
-* [ ] 10 vòng giống hệt nhau, vòng 10 có MixColumns, leak lấy sau AddRoundKey đúng vị trí ở mục 3.
-* [ ] Buffer xử lý đúng số byte lẻ và vượt 40 byte.
-* [ ] Đạt cả 96 vector của gói tham chiếu LEX (nêu rõ trong báo cáo đây là nhất quán với mã tham chiếu).
-* [ ] Báo cáo phân tích động lực thiết kế (rò rỉ từ AES) và tấn công Dunkelman–Keller; số liệu đã có trong `docs/cryptanalysis_notes.md`.
-* [ ] Slide phân bổ nội dung cho từng thành viên (5 phần, theo mục 2.3).
-
----
-
-## 9. Tài liệu tham khảo
+## 8. Tài liệu tham khảo
 
 1. Alex Biryukov, *The Design of a Stream Cipher LEX*, Selected Areas in Cryptography (SAC) 2006, LNCS 4356, pp. 67–75, Springer, 2007 (thông tin trích dẫn lấy từ danh mục tài liệu tham khảo của bài Dunkelman–Keller).
 2. NIST, *FIPS PUB 197: Advanced Encryption Standard*, 2001.
