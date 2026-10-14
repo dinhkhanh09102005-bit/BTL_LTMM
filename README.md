@@ -1,23 +1,4 @@
 # LEX — Dự án triển khai mã hóa dòng bằng Python
-
-> **Bài tập nhóm 6 thành viên — Học phần: Mật mã học & An toàn thông tin**
-> Repository: `https://github.com/<to-chuc-hoac-nhom>/LEX-Stream-Cipher`
-> Ngôn ngữ: **Python 3.10+** · Kiểm thử: **`unittest`** · Quy trình: **nhánh tính năng → Pull Request → review chéo → merge `main`**
-
----
-
-## Trạng thái xác minh và cổng kiểm định
-
-* Lệnh kiểm tra toàn bộ: `python run_tests.py` — hiện có **88 test**, đã chạy đạt toàn bộ với bản cài đặt trong `src/`.
-* Nghiệm thu G4/G5/G6/G7: `python run_tests.py --require-reference-trace`. Chế độ này **thất bại** nếu thiếu `tests/vectors/reference_trace.json` hoặc `tests/vectors/estream_lex_kat.json`, nếu có test bị skip, hoặc nếu dùng cùng `--fast`.
-* `python run_tests.py --fast` chỉ để chạy nhanh khi đang code (bỏ 8 vector dài 131072 byte). Không dùng khi nghiệm thu.
-* **Mức bằng chứng** (ghi rõ trong báo cáo):
-  * NIST FIPS-197 là chuẩn độc lập. Dùng cho TV1–TV3.
-  * `reference_trace.json` và `estream_lex_kat.json` do **chính mã C của tác giả LEX** sinh ra (file gốc tên `unverified.test-vectors`). Khớp chúng chứng minh nhất quán với mã tham chiếu, chưa phải kiểm chứng độc lập.
-* Không copy mã nguồn hoàn chỉnh vào nhánh Skeleton: `main` ban đầu chỉ có cấu trúc thư mục, tài liệu và test.
-
----
-
 ## 1. Mục tiêu dự án
 
 Triển khai thuật toán mã dòng **LEX (Leak EXtraction)** theo bản dự thi eSTREAM Phase 3 (**LEX-128, mã tham chiếu v2**), bảo đảm module hóa, kiểm chứng từng tầng biến đổi và đối soát với mã C tham chiếu.
