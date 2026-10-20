@@ -1,0 +1,763 @@
+{
+ "source": {
+  "file": "lex.c (LEX-v2, eSTREAM Phase 3 API-compliant code)",
+  "sha256": "12eb9fae184aea0efb23a3170db324eb57191cb17aabc62e558596e241dcfe10",
+  "compiler": "gcc",
+  "flags": "-O0"
+ },
+ "conventions": {
+  "round_numbering": "1..10, K_r = round_keys[r]",
+  "state_byte_index": "4*c + r (column-major)",
+  "cycles_per_case": 3
+ },
+ "cases": [
+  {
+   "name": "key0_iv0",
+   "key": "00000000000000000000000000000000",
+   "iv": "00000000000000000000000000000000",
+   "aes_input_block": "00000000000000000000000000000000",
+   "s0": "66E94BD4EF8A2C3B884CFA59CA342B2E",
+   "round_keys": [
+    "00000000000000000000000000000000",
+    "62636363626363636263636362636363",
+    "9B9898C9F9FBFBAA9B9898C9F9FBFBAA",
+    "90973450696CCFFAF2F457330B0FAC99",
+    "EE06DA7B876A1581759E42B27E91EE2B",
+    "7F2E2B88F8443E098DDA7CBBF34B9290",
+    "EC614B851425758C99FF09376AB49BA7",
+    "217517873550620BACAF6B3CC61BF09B",
+    "0EF903333BA9613897060A04511DFA9F",
+    "B1D4D8E28A7DB9DA1D7BB3DE4C664941",
+    "B4EF5BCB3E92E21123E951CF6F8F188E"
+   ],
+   "cycles": [
+    {
+     "rounds": [
+      {
+       "round": 1,
+       "state_after_ark": "9AEA270705AEB45188BBFF401273AD1D",
+       "leak": "FF27889A"
+      },
+      {
+       "round": 2,
+       "state_after_ark": "756D1FBB5A3E1FF99FC7386466A2AFF2",
+       "leak": "64BBC76D"
+      },
+      {
+       "round": 3,
+       "state_after_ark": "F2F59550CC24605348999D96AA5CFDB6",
+       "leak": "9D9548F2"
+      },
+      {
+       "round": 4,
+       "state_after_ark": "AD4F0B0F3F49ED40C8CB22E54C11B4C9",
+       "leak": "E50FCB4F"
+      },
+      {
+       "round": 5,
+       "state_after_ark": "4DBEC425C8F5CFE8F9595B23BA57E593",
+       "leak": "5BC4F94D"
+      },
+      {
+       "round": 6,
+       "state_after_ark": "E5C243C77F0FBEC3DA6F45EDDCA4A4C8",
+       "leak": "EDC76FC2"
+      },
+      {
+       "round": 7,
+       "state_after_ark": "941A4724E6D4DB10ED6A33CA456BEB2B",
+       "leak": "3347ED94"
+      },
+      {
+       "round": 8,
+       "state_after_ark": "A0E4FC27E5357E36D69C3EABBD88C3DE",
+       "leak": "AB279CE4"
+      },
+      {
+       "round": 9,
+       "state_after_ark": "64D3F6C7B8BDADD908D0F5A192A20191",
+       "leak": "F5F60864"
+      },
+      {
+       "round": 10,
+       "state_after_ark": "DBE82D8BCC5C573E7A5E808DFC9A56C8",
+       "leak": "8D8B5EE8"
+      }
+     ],
+     "keystream40": "FF27889A64BBC76D9D9548F2E50FCB4F5BC4F94DEDC76FC23347ED94AB279CE4F5F608648D8B5EE8"
+    },
+    {
+     "rounds": [
+      {
+       "round": 1,
+       "state_after_ark": "F0EA32FF906D4E2D74136709A94E19D2",
+       "leak": "673274F0"
+      },
+      {
+       "round": 2,
+       "state_after_ark": "EC4DFD8E7C106F8F2EE910C3F84DF26E",
+       "leak": "C38EE94D"
+      },
+      {
+       "round": 3,
+       "state_after_ark": "070C053CFBD9E36F8997B831315E374D",
+       "leak": "B8058907"
+      },
+      {
+       "round": 4,
+       "state_after_ark": "AFFECCAB6B309B4F0B9C88382445A703",
+       "leak": "38AB9CFE"
+      },
+      {
+       "round": 5,
+       "state_after_ark": "3E734835411A81CEA67438F05A2B3E6B",
+       "leak": "3848A63E"
+      },
+      {
+       "round": 6,
+       "state_after_ark": "16FAD41380C2BA05005FFEF507973DFE",
+       "leak": "F5135FFA"
+      },
+      {
+       "round": 7,
+       "state_after_ark": "C015CEBDA40CA955CA74AD8F3265DAC1",
+       "leak": "ADCECAC0"
+      },
+      {
+       "round": 8,
+       "state_after_ark": "9578FE7D295C9AD2DF9221BD5C91A896",
+       "leak": "BD7D9278"
+      },
+      {
+       "round": 9,
+       "state_after_ark": "56E6F21037E4D646AC9F052CC5E65A6F",
+       "leak": "05F2AC56"
+      },
+      {
+       "round": 10,
+       "state_after_ark": "B599B64A13B6814E40A5A9D4365E54E5",
+       "leak": "D44AA599"
+      }
+     ],
+     "keystream40": "673274F0C38EE94DB805890738AB9CFE3848A63EF5135FFAADCECAC0BD7D927805F2AC56D44AA599"
+    },
+    {
+     "rounds": [
+      {
+       "round": 1,
+       "state_after_ark": "0B9D353364A43975F927DF3005FD481E",
+       "leak": "DF35F90B"
+      },
+      {
+       "round": 2,
+       "state_after_ark": "FAEA4B87A10E8E6C4595DE9ADB1EE653",
+       "leak": "9A8795EA"
+      },
+      {
+       "round": 3,
+       "state_after_ark": "DC3DA450EA94E9265BE0C6E0513073BC",
+       "leak": "C6A45BDC"
+      },
+      {
+       "round": 4,
+       "state_after_ark": "4E66A2B676ED83DBB583EF4151CD1CA3",
+       "leak": "41B68366"
+      },
+      {
+       "round": 5,
+       "state_after_ark": "0BDBEA67754E1BAD6399B03170502D3A",
+       "leak": "B0EA630B"
+      },
+      {
+       "round": 6,
+       "state_after_ark": "ACA6012B4189391793A510C470A164D7",
+       "leak": "C42BA5A6"
+      },
+      {
+       "round": 7,
+       "state_after_ark": "2EFABC5E90EB6929D56376F606288566",
+       "leak": "76BCD52E"
+      },
+      {
+       "round": 8,
+       "state_after_ark": "477AFED722DE27440D670301437A977E",
+       "leak": "01D7677A"
+      },
+      {
+       "round": 9,
+       "state_after_ark": "45309D82A572B6657DCEFEEBBDE08E81",
+       "leak": "FE9D7D45"
+      },
+      {
+       "round": 10,
+       "state_after_ark": "1FDB0C9ABEA168AFED6024F030C6DA83",
+       "leak": "F09A60DB"
+      }
+     ],
+     "keystream40": "DF35F90B9A8795EAC6A45BDC41B68366B0EA630BC42BA5A676BCD52E01D7677AFE9D7D45F09A60DB"
+    }
+   ]
+  },
+  {
+   "name": "official_set1_v0",
+   "key": "80000000000000000000000000000000",
+   "iv": "00000000000000000000000000000000",
+   "aes_input_block": "00000000000000000000000000000000",
+   "s0": "0EDD33D3C621E546455BD8BA1418BEC8",
+   "round_keys": [
+    "80000000000000000000000000000000",
+    "E2636363E2636363E2636363E2636363",
+    "1B9898FBF9FBFB981B9898FBF9FBFB98",
+    "1097DE62E96C25FAF2F4BD010B0F4699",
+    "6ECD304987A115B37555A8B27E5AEE2B",
+    "C0E5C1BA4744D40932117CBB4C4B9290",
+    "53AAA19314EE759A26FF09216AB49BB1",
+    "9EBE69918A501C0BACAF152AC61B8E9B",
+    "B1A77D253BF7612E975874045143FA9F",
+    "B08AA6F48B7DC7DA1C25B3DE4D664941",
+    "B5B125173ECCE2CD22E951136F8F1852"
+   ],
+   "cycles": [
+    {
+     "rounds": [
+      {
+       "round": 1,
+       "state_after_ark": "3A62D4D2122A03FF4B48D30B7884F69D",
+       "leak": "D3D44B3A"
+      },
+      {
+       "round": 2,
+       "state_after_ark": "0C3DD35F71E520B9D95BDE0E2FAE66C0",
+       "leak": "0E5F5B3D"
+      },
+      {
+       "round": 3,
+       "state_after_ark": "205D16D00327938B9FEE5A70543DE77B",
+       "leak": "5A169F20"
+      },
+      {
+       "round": 4,
+       "state_after_ark": "CB014FBBED5DE562CB349DDE67CCD279",
+       "leak": "DEBB3401"
+      },
+      {
+       "round": 5,
+       "state_after_ark": "C236EFFE9A0FCD94FFA5DE1A1D5BE59B",
+       "leak": "DEEFFFC2"
+      },
+      {
+       "round": 6,
+       "state_after_ark": "8A50F4BF1791B4FBBCC3E5B92964A6A1",
+       "leak": "B9BFC350"
+      },
+      {
+       "round": 7,
+       "state_after_ark": "119B692F2F98921A13994767B9C2831D",
+       "leak": "47691311"
+      },
+      {
+       "round": 8,
+       "state_after_ark": "60F6150DC11F663959DD38000B69B22F",
+       "leak": "000DDDF6"
+      },
+      {
+       "round": 9,
+       "state_after_ark": "42DD8772C3127211CAFE051C8DFFE38B",
+       "leak": "0587CA42"
+      },
+      {
+       "round": 10,
+       "state_after_ark": "FB9451BBE5FC9595650A80915117BB17",
+       "leak": "91BB0A94"
+      }
+     ],
+     "keystream40": "D3D44B3A0E5F5B3D5A169F20DEBB3401DEEFFFC2B9BFC35047691311000DDDF60587CA4291BB0A94"
+    },
+    {
+     "rounds": [
+      {
+       "round": 1,
+       "state_after_ark": "0AAB56F4E2BB3751889719C196095C1A",
+       "leak": "1956880A"
+      },
+      {
+       "round": 2,
+       "state_after_ark": "86F55B33A409A58CEB474CA58662AE3B",
+       "leak": "A53347F5"
+      },
+      {
+       "round": 3,
+       "state_after_ark": "5048F459A78A41F8837D207AB290E2B9",
+       "leak": "20F48350"
+      },
+      {
+       "round": 4,
+       "state_after_ark": "ABF692D97660DBBDE8E282C0BF8DE30C",
+       "leak": "C0D9E2F6"
+      },
+      {
+       "round": 5,
+       "state_after_ark": "82F74C38A05109A2CD9BAAEB99AD641C",
+       "leak": "AA4CCD82"
+      },
+      {
+       "round": 6,
+       "state_after_ark": "2D739FF8B7E40EF8F0323D35FD603F38",
+       "leak": "35F83273"
+      },
+      {
+       "round": 7,
+       "state_after_ark": "AEDA9FA29261BF3F5EAF272CD93AB974",
+       "leak": "279F5EAE"
+      },
+      {
+       "round": 8,
+       "state_after_ark": "165B580E428AB5A412189E5DBBB11B7D",
+       "leak": "5D0E185B"
+      },
+      {
+       "round": 9,
+       "state_after_ark": "48D393AD3B51E5E1F590BDAE50D6FF10",
+       "leak": "BD93F548"
+      },
+      {
+       "round": 10,
+       "state_after_ark": "C91E17C5C241E8B7D07FF1E35E84B3CB",
+       "leak": "E3C57F1E"
+      }
+     ],
+     "keystream40": "1956880AA53347F520F48350C0D9E2F6AA4CCD8235F83273279F5EAE5D0E185BBD93F548E3C57F1E"
+    },
+    {
+     "rounds": [
+      {
+       "round": 1,
+       "state_after_ark": "634445030EE8BFE4BA0F57154E785740",
+       "leak": "5745BA63"
+      },
+      {
+       "round": 2,
+       "state_after_ark": "12AA553F0E2A1DA530D4B7FCDBA33448",
+       "leak": "FC3FD4AA"
+      },
+      {
+       "round": 3,
+       "state_after_ark": "563D4DCA110A69A61EFD5AF799B2CB3A",
+       "leak": "5A4D1E56"
+      },
+      {
+       "round": 4,
+       "state_after_ark": "80EB1A430FDE618D0F535CB84182760C",
+       "leak": "B84353EB"
+      },
+      {
+       "round": 5,
+       "state_after_ark": "D2329C46A5A1117214E1A12AF24789D0",
+       "leak": "A19C14D2"
+      },
+      {
+       "round": 6,
+       "state_after_ark": "365DD2B7F6AB307BAC6734CA61031A41",
+       "leak": "CAB7675D"
+      },
+      {
+       "round": 7,
+       "state_after_ark": "A9D4A0F9915764A38C2DED0EA714B911",
+       "leak": "EDA08CA9"
+      },
+      {
+       "round": 8,
+       "state_after_ark": "36BFC25A9EBE2411A0E22FA6D9E18E3D",
+       "leak": "A65AE2BF"
+      },
+      {
+       "round": 9,
+       "state_after_ark": "61D04E0E89C8BF2173C37C272D3D7468",
+       "leak": "7C4E7361"
+      },
+      {
+       "round": 10,
+       "state_after_ark": "06E0CD4F2031B2CE9CA4BB709063EFDA",
+       "leak": "704FA4E0"
+      }
+     ],
+     "keystream40": "5745BA63FC3FD4AA5A4D1E56B84353EBA19C14D2CAB7675DEDA08CA9A65AE2BF7C4E7361704FA4E0"
+    }
+   ]
+  },
+  {
+   "name": "iv_byte_order_probe",
+   "key": "00000000000000000000000000000000",
+   "iv": "00112233445566778899AABBCCDDEEFF",
+   "aes_input_block": "3322110077665544BBAA9988FFEEDDCC",
+   "s0": "1C74A257B03AA9B2E92434CF1F99F209",
+   "round_keys": [
+    "00000000000000000000000000000000",
+    "62636363626363636263636362636363",
+    "9B9898C9F9FBFBAA9B9898C9F9FBFBAA",
+    "90973450696CCFFAF2F457330B0FAC99",
+    "EE06DA7B876A1581759E42B27E91EE2B",
+    "7F2E2B88F8443E098DDA7CBBF34B9290",
+    "EC614B851425758C99FF09376AB49BA7",
+    "217517873550620BACAF6B3CC61BF09B",
+    "0EF903333BA9613897060A04511DFA9F",
+    "B1D4D8E28A7DB9DA1D7BB3DE4C664941",
+    "B4EF5BCB3E92E21123E951CF6F8F188E"
+   ],
+   "cycles": [
+    {
+     "rounds": [
+      {
+       "round": 1,
+       "state_after_ark": "C3CD4C463F3356587AC3BEFB0D780976",
+       "leak": "BE4C7AC3"
+      },
+      {
+       "round": 2,
+       "state_after_ark": "0FFA7AA63A8B4CAEA83012FD2E8AF9DA",
+       "leak": "FDA630FA"
+      },
+      {
+       "round": 3,
+       "state_after_ark": "A58C0F90C3700EB4D15B7319634B1E66",
+       "leak": "730FD1A5"
+      },
+      {
+       "round": 4,
+       "state_after_ark": "AD1BDDC982C046783CCAAF3440905B41",
+       "leak": "34C9CA1B"
+      },
+      {
+       "round": 5,
+       "state_after_ark": "61DC68F2A62957D09D15B15F49F1A84E",
+       "leak": "B1689D61"
+      },
+      {
+       "round": 6,
+       "state_after_ark": "3AB3FB9CFC671772E847ECD119BADAB2",
+       "leak": "D19C47B3"
+      },
+      {
+       "round": 7,
+       "state_after_ark": "579ACC393C9CA590C996DAF10C20F01D",
+       "leak": "DACCC957"
+      },
+      {
+       "round": 8,
+       "state_after_ark": "3258DF04C3E42F26DF135644C2234861",
+       "leak": "44041358"
+      },
+      {
+       "round": 9,
+       "state_after_ark": "1202C19AF1AD437839E72E2AB6B30167",
+       "leak": "2EC13912"
+      },
+      {
+       "round": 10,
+       "state_after_ark": "2DC1F13E043CFC6A7415018F95E421E0",
+       "leak": "8F3E15C1"
+      }
+     ],
+     "keystream40": "BE4C7AC3FDA630FA730FD1A534C9CA1BB1689D61D19C47B3DACCC957440413582EC139128F3E15C1"
+    },
+    {
+     "rounds": [
+      {
+       "round": 1,
+       "state_after_ark": "7213905E398DE4B545D9C7027D01DF33",
+       "leak": "C7904572"
+      },
+      {
+       "round": 2,
+       "state_after_ark": "F9F04C0F44621387767B2ED68532324A",
+       "leak": "D60F7BF0"
+      },
+      {
+       "round": 3,
+       "state_after_ark": "BBC404CC69262939D9E6275F3AEA4C3D",
+       "leak": "2704D9BB"
+      },
+      {
+       "round": 4,
+       "state_after_ark": "C8712D2B85A4EDA06DA139BC2B12698C",
+       "leak": "BC2BA171"
+      },
+      {
+       "round": 5,
+       "state_after_ark": "1906023893567A998DFC1935C47DC5A4",
+       "leak": "19028D19"
+      },
+      {
+       "round": 6,
+       "state_after_ark": "0AE24615DD7447EBA0306C9FAF95E601",
+       "leak": "9F1530E2"
+      },
+      {
+       "round": 7,
+       "state_after_ark": "6EA1C61477494B6BBA1C35BEFC693C85",
+       "leak": "35C6BA6E"
+      },
+      {
+       "round": 8,
+       "state_after_ark": "6726321164A3D0A4BFA3F5B061A9EC92",
+       "leak": "B011A326"
+      },
+      {
+       "round": 9,
+       "state_after_ark": "173B51045EE1EAC409E2F5A41C0B8339",
+       "leak": "F5510917"
+      },
+      {
+       "round": 10,
+       "state_after_ark": "A8D7B2FA233CEC7291CAE60EBF17A8C6",
+       "leak": "0EFACAD7"
+      }
+     ],
+     "keystream40": "C7904572D60F7BF02704D9BBBC2BA17119028D199F1530E235C6BA6EB011A326F55109170EFACAD7"
+    },
+    {
+     "rounds": [
+      {
+       "round": 1,
+       "state_after_ark": "E1518A285DDDD9E50700BCBC059504F6",
+       "leak": "BC8A07E1"
+      },
+      {
+       "round": 2,
+       "state_after_ark": "0F14ADFA02487787D352FB6017138439",
+       "leak": "60FA5214"
+      },
+      {
+       "round": 3,
+       "state_after_ark": "974638B3F5D771663BDB445FC0C43C26",
+       "leak": "44383B97"
+      },
+      {
+       "round": 4,
+       "state_after_ark": "1B48681806AE3038BA7EE7F293AE1982",
+       "leak": "F2187E48"
+      },
+      {
+       "round": 5,
+       "state_after_ark": "8AE66634511CFDDE0B35EF132BB694B0",
+       "leak": "EF660B8A"
+      },
+      {
+       "round": 6,
+       "state_after_ark": "97A13E9136BD5E6033002D0D33C3CB8F",
+       "leak": "0D9100A1"
+      },
+      {
+       "round": 7,
+       "state_after_ark": "0F09DB400433A261212D92458283D31A",
+       "leak": "92DB210F"
+      },
+      {
+       "round": 8,
+       "state_after_ark": "5161D57AD8539C990F075888202C2E4D",
+       "leak": "887A0761"
+      },
+      {
+       "round": 9,
+       "state_after_ark": "AD990ED0F7040A228F049BF109A9E121",
+       "leak": "9B0E8FAD"
+      },
+      {
+       "round": 10,
+       "state_after_ark": "614408686B6603439352121F8241C15D",
+       "leak": "1F685244"
+      }
+     ],
+     "keystream40": "BC8A07E160FA521444383B97F2187E48EF660B8A0D9100A192DB210F887A07619B0E8FAD1F685244"
+    }
+   ]
+  },
+  {
+   "name": "mixed",
+   "key": "0123456789ABCDEFFEDCBA9876543210",
+   "iv": "000102030405060708090A0B0C0D0E0F",
+   "aes_input_block": "03020100070605040B0A09080F0E0D0C",
+   "s0": "73BA55EA9A0FC1E41A37F3211DE7CBB7",
+   "round_keys": [
+    "0123456789ABCDEFFEDCBA9876543210",
+    "20008F5FA9AB42B05777F8282123CA38",
+    "047488A2ADDFCA12FAA8323ADB8BF802",
+    "3D35FF1B90EA35096A420733B1C9FF31",
+    "E82338D378C90DDA128B0AE9A342F5D8",
+    "D4C559D9AC0C5403BE875EEA1DC5AB32",
+    "52A77A7DFEAB2E7E402C70945DE9DBA6",
+    "0C1E5E31F2B5704FB29900DBEF70DB7D",
+    "DDA7A1EE2F12D1A19D8BD17A72FB0A07",
+    "C9C064AEE6D2B50F7B59647509A26E72",
+    "C55F24AF238D91A058D4F5D551769BA7"
+   ],
+   "cycles": [
+    {
+     "rounds": [
+      {
+       "round": 1,
+       "state_after_ark": "1BDD8CE7EF9ACCF33A90966FF00176A2",
+       "leak": "968C3A1B"
+      },
+      {
+       "round": 2,
+       "state_after_ark": "3821EA14041CA2030C7111A363EBC04C",
+       "leak": "A3147121"
+      },
+      {
+       "round": 3,
+       "state_after_ark": "27A5005ED16A1EF2519C88B2709793F4",
+       "leak": "88005127"
+      },
+      {
+       "round": 4,
+       "state_after_ark": "1603BF3FF977A62AC27D15634EBE1F31",
+       "leak": "633F7D03"
+      },
+      {
+       "round": 5,
+       "state_after_ark": "C05F0B292A5E3666F018F1F2118BA1F1",
+       "leak": "F10BF0C0"
+      },
+      {
+       "round": 6,
+       "state_after_ark": "D5F4390854FCF6841C94C26B84681CF8",
+       "leak": "6B0894F4"
+      },
+      {
+       "round": 7,
+       "state_after_ark": "A5486423785E01F113E61C8DB6F33E9F",
+       "leak": "1C6413A5"
+      },
+      {
+       "round": 8,
+       "state_after_ark": "7E75AA8D5142F60E9288DFEA39C80941",
+       "leak": "EA8D8875"
+      },
+      {
+       "round": 9,
+       "state_after_ark": "5D51020F54CE4518C19966AD54D0F78E",
+       "leak": "6602C15D"
+      },
+      {
+       "round": 10,
+       "state_after_ark": "F152AEF154A415AAE278FF1B82C81249",
+       "leak": "1BF17852"
+      }
+     ],
+     "keystream40": "968C3A1BA314712188005127633F7D03F10BF0C06B0894F41C6413A5EA8D88756602C15D1BF17852"
+    },
+    {
+     "rounds": [
+      {
+       "round": 1,
+       "state_after_ark": "8F32068E5E09AFFC17BFB4D4F1748111",
+       "leak": "B406178F"
+      },
+      {
+       "round": 2,
+       "state_after_ark": "EE0B66A4109AA9CC736645B7D6AF5030",
+       "leak": "B7A4660B"
+      },
+      {
+       "round": 3,
+       "state_after_ark": "D4C0BFBD50FAB1BE9C214A6541AE7F81",
+       "leak": "4ABF9CD4"
+      },
+      {
+       "round": 4,
+       "state_after_ark": "D55CFEE86A6C92F42430C93BEEA090AE",
+       "leak": "3BE8305C"
+      },
+      {
+       "round": 5,
+       "state_after_ark": "1BFE9C825F3D244CED033F8E3E4A6A90",
+       "leak": "3F9CED1B"
+      },
+      {
+       "round": 6,
+       "state_after_ark": "6BB9B805E787AB6B7C9E2F31DB7595D4",
+       "leak": "31059EB9"
+      },
+      {
+       "round": 7,
+       "state_after_ark": "9638C4229D22061F3D63D4E4D904A20C",
+       "leak": "D4C43D96"
+      },
+      {
+       "round": 8,
+       "state_after_ark": "FE2C2B792C7CAEBF02B7676617185DE2",
+       "leak": "6679B72C"
+      },
+      {
+       "round": 9,
+       "state_after_ark": "89576DC61E88340E806F5FA0B6B4698A",
+       "leak": "5F6D8089"
+      },
+      {
+       "round": 10,
+       "state_after_ark": "765F40AA69106514C2F72B65D84685ED",
+       "leak": "65AAF75F"
+      }
+     ],
+     "keystream40": "B406178FB7A4660B4ABF9CD43BE8305C3F9CED1B31059EB9D4C43D966679B72C5F6D808965AAF75F"
+    },
+    {
+     "rounds": [
+      {
+       "round": 1,
+       "state_after_ark": "B1EA7B86C38C091C000780FBA95D2983",
+       "leak": "807B00B1"
+      },
+      {
+       "round": 2,
+       "state_after_ark": "02D48A8B44D0BC8855ACE0D1FA41BFF4",
+       "leak": "D18BACD4"
+      },
+      {
+       "round": 3,
+       "state_after_ark": "1D25FB763BEDE8C7ADE5D34268E51217",
+       "leak": "D3FBAD1D"
+      },
+      {
+       "round": 4,
+       "state_after_ark": "D2770EEC26FAF7879A60090CDFE3D6EB",
+       "leak": "0CEC6077"
+      },
+      {
+       "round": 5,
+       "state_after_ark": "3AC0E3F80A8FCDA05AEC83ADA8EC09F1",
+       "leak": "83E35A3A"
+      },
+      {
+       "round": 6,
+       "state_after_ark": "914FB2203909469A9FC619493F0D66CD",
+       "leak": "4920C64F"
+      },
+      {
+       "round": 7,
+       "state_after_ark": "7F47B11D9536728BF216B126F3C3D34A",
+       "leak": "B1B1F27F"
+      },
+      {
+       "round": 8,
+       "state_after_ark": "73EA9CF970B887AD1320BA66249A2505",
+       "leak": "66F920EA"
+      },
+      {
+       "round": 9,
+       "state_after_ark": "E7FBC96A202E9D5D19A3A2A5D38BA4DE",
+       "leak": "A2C919E7"
+      },
+      {
+       "round": 10,
+       "state_after_ark": "82FAD23903F7B8253D4A69CAD4EA4450",
+       "leak": "CA394AFA"
+      }
+     ],
+     "keystream40": "807B00B1D18BACD4D3FBAD1D0CEC607783E35A3A4920C64FB1B1F27F66F920EAA2C919E7CA394AFA"
+    }
+   ]
+  }
+ ]
+}
