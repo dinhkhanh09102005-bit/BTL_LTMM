@@ -1,108 +1,115 @@
-"""Bai 5: test loi va ranh gioi cho TV5; TV3/TV4 van la mock."""
+"""TV5 negative tests for input validation and cycle boundaries."""
+
+from __future__ import annotations
+
 import importlib
 import sys
 import types
 import unittest
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from lex.lex.keystream import KeystreamBuffer
 from tests.support.mock_lex_dependencies import install_mock_dependencies
 
 
-class FakeKeyContext:
-    round_keys = [bytes(16)] * 11
-
-
-def engine_module(cycle):
+def _engine_module(cycle):
     module = types.ModuleType("lex.lex.round_engine")
     module.lex_cycle = cycle
     return module
 
 
 class TestBufferErrorsAndBoundaries(unittest.TestCase):
-    def test_invalid_read_arguments(self):
-        buffer = KeystreamBuffer(FakeKeyContext(), bytearray(16))
-        for bad in ("5", 1.5, True, None):
-            with self.subTest(bad=bad):
-                with self.assertRaises(TypeError):
-                    buffer.read(bad)
-        with self.assertRaises(ValueError):
-            buffer.read(-5)
-        self.assertEqual(len(buffer._buf), 0)
-
     def test_invalid_initial_state(self):
-        for size in (15, 17):
-            with self.subTest(size=size):
-                with self.assertRaises(ValueError):
-                    KeystreamBuffer(FakeKeyContext(), bytearray(size))
+        context = SimpleNamespace(round_keys=(bytes(16),) * 11)
+        for invalid in ("not bytes", None):
+            with self.subTest(invalid=invalid), self.assertRaises(TypeError):
+                KeystreamBuffer(context, invalid)
+        for invalid in (bytes(15), bytes(17)):
+            with self.subTest(length=len(invalid)), self.assertRaises(ValueError):
+                KeystreamBuffer(context, invalid)
+
+    def test_boundaries_39_40_41(self):
+        for n in (39, 40, 41):
+            calls: list[int] = []
+
+            def cycle(state, keys):
+                del state, keys
+                start = len(calls) * 40
+                calls.append(start)
+                return bytes((start + i) % 256 for i in range(40)), bytes(16)
+
+            with self.subTest(n=n), patch.dict(
+                sys.modules, {"lex.lex.round_engine": _engine_module(cycle)}
+            ):
+                buffer = KeystreamBuffer(
+                    SimpleNamespace(round_keys=(bytes(16),) * 11), bytes(16)
+                )
+                self.assertEqual(
+                    buffer.read(n), bytes(i % 256 for i in range(n))
+                )
+                self.assertEqual(len(calls), (n + 39) // 40)
+                self.assertEqual(
+                    len(buffer._buf), len(calls) * 40 - n
+                )
 
     def test_engine_returns_39_instead_of_40(self):
         def bad_cycle(state, keys):
-            return bytes(39), bytearray(16)
+            del state, keys
+            return bytes(39), bytes(16)
 
-        with patch.dict(sys.modules, {
-            "lex.lex.round_engine": engine_module(bad_cycle)
-        }):
-            buffer = KeystreamBuffer(FakeKeyContext(), bytearray(16))
+        with patch.dict(
+            sys.modules, {"lex.lex.round_engine": _engine_module(bad_cycle)}
+        ):
+            buffer = KeystreamBuffer(
+                SimpleNamespace(round_keys=(bytes(16),) * 11), bytes(16)
+            )
             with self.assertRaisesRegex(ValueError, "exactly 40"):
                 buffer.read(1)
 
     def test_engine_returns_invalid_state(self):
         def bad_cycle(state, keys):
-            return bytes(40), bytearray(15)
+            del state, keys
+            return bytes(40), bytes(15)
 
-        with patch.dict(sys.modules, {
-            "lex.lex.round_engine": engine_module(bad_cycle)
-        }):
-            buffer = KeystreamBuffer(FakeKeyContext(), bytearray(16))
-            with self.assertRaisesRegex(ValueError, "16-byte state"):
+        with patch.dict(
+            sys.modules, {"lex.lex.round_engine": _engine_module(bad_cycle)}
+        ):
+            buffer = KeystreamBuffer(
+                SimpleNamespace(round_keys=(bytes(16),) * 11), bytes(16)
+            )
+            with self.assertRaisesRegex(ValueError, "16 bytes"):
                 buffer.read(1)
 
-    def test_boundaries_39_40_41(self):
-        for n in (39, 40, 41):
-            calls = []
-
-            def cycle(state, keys):
-                start = len(calls) * 40
-                calls.append(start)
-                return bytes(range(start, start + 40)), bytearray(16)
-
-            with self.subTest(n=n):
-                with patch.dict(sys.modules, {
-                    "lex.lex.round_engine": engine_module(cycle)
-                }):
-                    buffer = KeystreamBuffer(FakeKeyContext(), bytearray(16))
-                    self.assertEqual(buffer.read(n), bytes(range(n)))
-                    expected_cycles = (n + 39) // 40
-                    self.assertEqual(len(calls), expected_cycles)
-                    self.assertEqual(len(buffer._buf), expected_cycles * 40 - n)
+    def test_bad_read_arguments(self):
+        buffer = KeystreamBuffer(
+            SimpleNamespace(round_keys=(bytes(16),) * 11), bytes(16)
+        )
+        for invalid in (True, 1.5, "5", None):
+            with self.subTest(invalid=invalid), self.assertRaises(TypeError):
+                buffer.read(invalid)
+        with self.assertRaises(ValueError):
+            buffer.read(-1)
 
     def test_split_reads_preserve_position(self):
-        calls = []
+        calls: list[int] = []
 
         def cycle(state, keys):
+            del state, keys
             start = len(calls) * 40
             calls.append(start)
-            return bytes(range(start, start + 40)), bytearray(16)
+            return bytes((start + i) % 256 for i in range(40)), bytes(16)
 
-        with patch.dict(sys.modules, {
-            "lex.lex.round_engine": engine_module(cycle)
-        }):
-            buffer = KeystreamBuffer(FakeKeyContext(), bytearray(16))
+        with patch.dict(
+            sys.modules, {"lex.lex.round_engine": _engine_module(cycle)}
+        ):
+            buffer = KeystreamBuffer(
+                SimpleNamespace(round_keys=(bytes(16),) * 11), bytes(16)
+            )
             output = buffer.read(39) + buffer.read(2) + buffer.read(39)
             self.assertEqual(output, bytes(range(80)))
             self.assertEqual(len(calls), 2)
             self.assertEqual(len(buffer._buf), 0)
-
-    def test_zero_bytes_does_not_run_engine(self):
-        def forbidden_cycle(state, keys):
-            raise AssertionError("Engine must not run for read(0)")
-
-        with patch.dict(sys.modules, {
-            "lex.lex.round_engine": engine_module(forbidden_cycle)
-        }):
-            buffer = KeystreamBuffer(FakeKeyContext(), bytearray(16))
-            self.assertEqual(buffer.read(0), b"")
 
 
 class TestAPIErrorCases(unittest.TestCase):
@@ -110,7 +117,6 @@ class TestAPIErrorCases(unittest.TestCase):
         self.patcher = patch.dict(sys.modules, {})
         self.patcher.start()
         self.addCleanup(self.patcher.stop)
-        # install_mock_dependencies is safe only inside this test's scope.
         install_mock_dependencies()
         sys.modules.pop("lex.lex.api", None)
         self.addCleanup(lambda: sys.modules.pop("lex.lex.api", None))

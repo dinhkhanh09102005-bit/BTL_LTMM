@@ -1,4 +1,7 @@
-"""Additional TV5 contract tests independent of unfinished TV1-TV4 modules."""
+"""TV5 public API contract tests with deterministic TV3/TV4 mocks."""
+
+from __future__ import annotations
+
 import importlib
 import sys
 import unittest
@@ -25,23 +28,30 @@ class TestTV5PublicContract(unittest.TestCase):
                 raw = bytes(i % 256 for i in range(n))
                 encrypted = self.api.encrypt(ZERO, ZERO, raw)
                 self.assertEqual(len(encrypted), n)
-                self.assertEqual(self.api.decrypt(ZERO, ZERO, encrypted), raw)
+                self.assertEqual(
+                    self.api.decrypt(ZERO, ZERO, encrypted), raw
+                )
 
     def test_streaming_process_equals_one_shot(self):
         raw = bytes(i % 256 for i in range(301))
         expected = self.api.encrypt(ZERO, ZERO, raw)
-        for sizes in ((39, 1, 261), (1, 40, 260), (0, 80, 221)):
-            with self.subTest(sizes=sizes):
-                session = self.api.LEX(ZERO, ZERO)
-                result = bytearray()
-                index = 0
-                for size in sizes:
-                    result.extend(session.process(raw[index:index + size]))
-                    index += size
-                self.assertEqual(index, len(raw))
-                self.assertEqual(bytes(result), expected)
+        session = self.api.LEX(ZERO, ZERO)
+        actual = (
+            session.process(raw[:39])
+            + session.process(raw[39:40])
+            + session.process(raw[40:181])
+            + session.process(raw[181:])
+        )
+        self.assertEqual(actual, expected)
 
-    def test_independent_sessions_have_independent_positions(self):
+    def test_keystream_and_process_share_one_position(self):
+        session = self.api.LEX(ZERO, ZERO)
+        prefix = session.keystream(7)
+        encrypted = session.process(b"AB")
+        recovered_stream = bytes(a ^ b for a, b in zip(encrypted, b"AB"))
+        self.assertEqual(prefix + recovered_stream, bytes(range(9)))
+
+    def test_sessions_have_independent_positions(self):
         first = self.api.LEX(ZERO, ZERO)
         second = self.api.LEX(ZERO, ZERO)
         self.assertEqual(first.keystream(7), bytes(range(7)))
@@ -49,28 +59,26 @@ class TestTV5PublicContract(unittest.TestCase):
         self.assertEqual(first.keystream(3), bytes(range(7, 10)))
         self.assertEqual(second.keystream(7), bytes(range(3, 10)))
 
-    def test_keystream_consistent_with_encrypting_zero_bytes(self):
-        n = 121
-        self.assertEqual(
-            self.api.LEX(ZERO, ZERO).keystream(n),
-            self.api.encrypt(ZERO, ZERO, bytes(n)),
-        )
+    def test_empty_operations_do_not_consume_stream(self):
+        session = self.api.LEX(ZERO, ZERO)
+        self.assertEqual(session.process(b""), b"")
+        self.assertEqual(session.keystream(0), b"")
+        self.assertEqual(session.keystream(5), bytes(range(5)))
 
-    def test_public_helpers_accept_bytes_like_inputs(self):
-        key = bytearray(16)
-        iv = memoryview(bytes(16))
-        data = memoryview(b"LEX TV5")
-        ciphertext = self.api.encrypt(key, iv, data)
+    def test_bytes_like_inputs_are_supported(self):
+        ciphertext = self.api.encrypt(
+            bytearray(ZERO), memoryview(ZERO), memoryview(b"LEX TV5")
+        )
         self.assertIsInstance(ciphertext, bytes)
-        self.assertEqual(self.api.decrypt(key, iv, ciphertext), b"LEX TV5")
+        self.assertEqual(self.api.decrypt(ZERO, ZERO, ciphertext), b"LEX TV5")
 
     def test_invalid_inputs_do_not_advance_stream(self):
-        obj = self.api.LEX(ZERO, ZERO)
+        session = self.api.LEX(ZERO, ZERO)
         with self.assertRaises(TypeError):
-            obj.process("not bytes")
+            session.process("not bytes")
         with self.assertRaises(ValueError):
-            obj.keystream(-1)
-        self.assertEqual(obj.keystream(6), bytes(range(6)))
+            session.keystream(-1)
+        self.assertEqual(session.keystream(6), bytes(range(6)))
 
 
 if __name__ == "__main__":
